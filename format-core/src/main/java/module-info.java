@@ -9,5 +9,6 @@ module org.d7z.objects.format.core {
     exports org.d7z.objects.format.api;
     opens org.d7z.objects.format.rules;
     exports org.d7z.objects.format.rules;
+    uses IFormat;
     provides IFormat with BasicDataFormat, DefaultDataFormat;
 }
