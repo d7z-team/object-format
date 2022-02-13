@@ -8,6 +8,7 @@ module org.d7z.objects.format.core {
     requires kotlin.stdlib;
     exports org.d7z.objects.format;
     exports org.d7z.objects.format.api;
+    exports org.d7z.objects.format.utils;
     opens org.d7z.objects.format.rules;
     exports org.d7z.objects.format.rules;
     uses IFormat;
