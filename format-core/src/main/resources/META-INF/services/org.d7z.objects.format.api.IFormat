@@ -1,2 +1,3 @@
 org.d7z.objects.format.rules.BasicDataFormat
 org.d7z.objects.format.rules.DefaultDataFormat
+org.d7z.objects.format.rules.StringDataFormat
