@@ -20,7 +20,18 @@
 
 ## 更新日志
 
-TODO()
+### 0.2.0
+
+- 新增 `String`、`StringBuilder`、`StringBuffer` 支持
+- 新增模块 `format-all` , 可直接导入此模块
+
+### 0.1.1
+
+- 新增 `Date` 对象支持
+
+### 0.1.0
+
+- 迁移后第一个版本
 
 ## LICENSE
 
