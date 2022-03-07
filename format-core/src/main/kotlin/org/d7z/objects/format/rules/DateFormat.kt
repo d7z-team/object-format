@@ -1,4 +1,4 @@
-package org.d7z.objects.format.ext.time
+package org.d7z.objects.format.rules
 
 import org.d7z.objects.format.CovertException
 import org.d7z.objects.format.api.IFormat

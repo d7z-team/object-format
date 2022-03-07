@@ -19,8 +19,7 @@ dependencies {
     implementation(kotlin("reflect"))
     implementation(kotlin("stdlib"))
     api(project(":format-core"))
-    api(project(":format-extra-json"))
-    api(project(":format-extra-time"))
+    api(project(":format-extra-gson"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")
 }
