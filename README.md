@@ -20,6 +20,12 @@
 
 ## 更新日志
 
+### 0.3.0
+
+- 合并 `format-extra-time` 模块到`core`下
+- 升级 `gson` 版本至 `2.9.0`
+- 重命名模块`format-extra-json` 为 `format-extra-gson`
+
 ### 0.2.0
 
 - 新增 `String`、`StringBuilder`、`StringBuffer` 支持

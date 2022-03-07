@@ -8,6 +8,9 @@ import java.util.ServiceLoader
 import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 
+/**
+ * 基于 Java SPI 机制加载默认的格式化方案
+ */
 object GlobalObjectFormat : IDataCovert {
     private val context by lazy {
         ServiceLoader.load(SpiFormatContext::class.java).findFirst().map { it.context }.orElseGet {
