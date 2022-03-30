@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 
 /**
- *
+ *  Object Format 构造器实现
  */
 class ObjectFormatContext private constructor(
     private val format: Map<KClass<*>, IFormat>,
@@ -70,6 +70,9 @@ class ObjectFormatContext private constructor(
         }
     }
 
+    /**
+     * Object Format 构造器实现
+     */
     class Builder : IFormatContext.IContextBuilder {
         private val formatMap = HashMap<KClass<*>, IFormat>()
         private val configMap = HashMap<String, String>()

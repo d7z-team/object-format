@@ -11,6 +11,9 @@ import java.io.ObjectOutputStream
 import java.util.Base64
 import kotlin.reflect.KClass
 
+/**
+ * 默认的 object format 实现，此实现基于Java 反序列化机制
+ */
 class DefaultDataFormat : IFormat {
     override val types = setOf(Any::class)
 

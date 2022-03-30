@@ -1,5 +1,6 @@
 package org.d7z.objects.format.api
 
+import org.d7z.objects.format.utils.SimpleDataCovert
 import java.io.Closeable
 import kotlin.reflect.KClass
 
@@ -23,4 +24,9 @@ interface IDataCovert : Closeable {
      * 数据合法性校验
      */
     fun verify(format: String, type: KClass<Any>): Boolean
+
+    /**
+     * 一个简单的 IDataCovert 开箱即用实现
+     */
+    companion object : SimpleDataCovert()
 }
