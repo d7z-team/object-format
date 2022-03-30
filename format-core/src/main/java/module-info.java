@@ -1,4 +1,5 @@
 import org.d7z.objects.format.api.IFormat;
+import org.d7z.objects.format.api.SpiFormatContext;
 import org.d7z.objects.format.rules.*;
 
 module org.d7z.objects.format.core {
@@ -10,5 +11,6 @@ module org.d7z.objects.format.core {
     opens org.d7z.objects.format.rules;
     exports org.d7z.objects.format.rules;
     uses IFormat;
+    uses SpiFormatContext;
     provides IFormat with DateFormat, DateTimeFormat, BasicDataFormat, DefaultDataFormat, StringDataFormat;
 }
