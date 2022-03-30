@@ -20,6 +20,11 @@
 
 ## 更新日志
 
+### 0.4.0
+
+- 修复 `Java Module` 加载问题
+- 迁移 API
+
 ### 0.3.0
 
 - 合并 `format-extra-time` 模块到`core`下
