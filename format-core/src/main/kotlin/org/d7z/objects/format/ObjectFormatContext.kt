@@ -4,6 +4,12 @@ import org.d7z.objects.format.api.FormatOverride
 import org.d7z.objects.format.api.IDataCovert
 import org.d7z.objects.format.api.IFormat
 import org.d7z.objects.format.api.IFormatContext
+import org.d7z.objects.format.rules.BasicDataFormat
+import org.d7z.objects.format.rules.DateFormat
+import org.d7z.objects.format.rules.DateTimeFormat
+import org.d7z.objects.format.rules.DefaultDataFormat
+import org.d7z.objects.format.rules.StringDataFormat
+import java.util.ServiceLoader
 import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 
@@ -72,10 +78,39 @@ class ObjectFormatContext private constructor(
 
     /**
      * Object Format 构造器实现
+     *
+     * @property includeDefault Boolean 导入默认的实现
+     * @property includeServiceLoader Boolean 从 ServiceLoader 下导入
+     * @constructor
      */
-    class Builder : IFormatContext.IContextBuilder {
+    class Builder(
+        private val includeDefault: Boolean = true,
+        private val includeServiceLoader: Boolean = false,
+    ) : IFormatContext.IContextBuilder {
         private val formatMap = HashMap<KClass<*>, IFormat>()
         private val configMap = HashMap<String, String>()
+
+        init {
+            initData()
+        }
+
+        /**
+         * 初始化内部实例
+         */
+        private fun initData() {
+            if (includeDefault) {
+                register(BasicDataFormat())
+                register(DateFormat())
+                register(DateTimeFormat())
+                register(StringDataFormat())
+                register(DefaultDataFormat())
+            }
+            if (includeServiceLoader) {
+                for (iFormat in spiFormatLoader()) {
+                    register(iFormat)
+                }
+            }
+        }
 
         @Synchronized
         override fun register(format: IFormat): IFormatContext.IContextBuilder {
@@ -100,8 +135,31 @@ class ObjectFormatContext private constructor(
             return ObjectFormatContext(HashMap(formatMap), HashMap(configMap)).apply {
                 formatMap.clear()
                 configMap.clear()
+                initData()
                 this.init()
             }
+        }
+
+        /**
+         * 使用 ServiceLoader 加载符合规则的 IFormat 对象
+         */
+        private fun spiFormatLoader(): MutableList<IFormat> {
+            val loader = ServiceLoader.load(IFormat::class.java)
+            val formats = loader.toMutableList()
+            formats.sortWith { o1, o2 -> // 对覆盖进行排序
+                val o1Ann = o1::class.findAnnotation<FormatOverride>()?.over?.toSet()
+                val o2Ann = o2::class.findAnnotation<FormatOverride>()?.over?.toSet()
+                if (o1Ann != null && o1Ann.contains(o2::class)) {
+                    1
+                } else if (o1Ann != null) {
+                    0
+                } else if (o2Ann != null && o2Ann.contains(o1::class)) {
+                    -1
+                } else {
+                    0
+                }
+            }
+            return formats
         }
     }
 

@@ -1,5 +1,0 @@
-org.d7z.objects.format.rules.BasicDataFormat
-org.d7z.objects.format.rules.DateFormat
-org.d7z.objects.format.rules.DateTimeFormat
-org.d7z.objects.format.rules.DefaultDataFormat
-org.d7z.objects.format.rules.StringDataFormat

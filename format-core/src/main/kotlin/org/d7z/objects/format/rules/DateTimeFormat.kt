@@ -16,7 +16,7 @@ class DateTimeFormat : IFormat {
     override fun init(context: IFormatContext) {
         this.dateFormat = DateTimeFormatter.ofPattern(context.getConfig("format.pattern.date", "yyyy/MM/dd"))
         this.dateTimeFormat = DateTimeFormatter
-            .ofPattern(context.getConfig("format.pattern.dateTime", "yyyy/MM/dd HH:mm:ss.SSSSSS"))
+            .ofPattern(context.getConfig("format.pattern.dateTime", "yyyy/MM/dd HH:mm:ss.SSSSSSSSS"))
     }
 
     override fun <T : Any> format(data: T, type: KClass<out T>, context: IFormatContext): String {

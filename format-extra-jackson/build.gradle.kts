@@ -1,0 +1,55 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    kotlin("jvm")
+    id("org.jlleitschuh.gradle.ktlint")
+    `maven-publish`
+}
+java.sourceCompatibility = JavaVersion.VERSION_11
+
+val compileKotlin: KotlinCompile by tasks
+val compileJava: JavaCompile by tasks
+compileKotlin.destinationDirectory.set(compileJava.destinationDirectory.get())
+
+java {
+    modularity.inferModulePath.set(true)
+}
+
+dependencies {
+    implementation(kotlin("reflect"))
+    implementation(kotlin("stdlib"))
+    api(project(":format-core"))
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")
+}
+
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions.jvmTarget = "11"
+}
+val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allSource)
+}
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = rootProject.group.toString()
+            artifactId = project.name
+            version = rootProject.version.toString()
+            from(components["java"])
+            artifact(sourcesJar.get())
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
