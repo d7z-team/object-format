@@ -1,25 +1,22 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+val springBootVersion: String by rootProject
+
 plugins {
     kotlin("jvm")
-    id("org.jlleitschuh.gradle.ktlint")
     `maven-publish`
 }
 java.sourceCompatibility = JavaVersion.VERSION_11
 
-val compileKotlin: KotlinCompile by tasks
-val compileJava: JavaCompile by tasks
-compileKotlin.destinationDirectory.set(compileJava.destinationDirectory.get())
-
-java {
-    modularity.inferModulePath.set(true)
-}
-
 dependencies {
-    implementation(kotlin("reflect"))
-    implementation(kotlin("stdlib"))
     api(project(":format-core"))
-    api("com.google.code.gson:gson:2.9.0")
+    compileOnly(project(":format-extra-jackson"))
+    compileOnly(project(":format-extra-gson"))
+    api("org.springframework.boot", "spring-boot-autoconfigure", springBootVersion)
+    annotationProcessor("org.springframework.boot", "spring-boot-configuration-processor", springBootVersion)
+    testImplementation(project(":format-extra-jackson"))
+    testImplementation("org.springframework.boot", "spring-boot-starter-test", springBootVersion)
+    testImplementation("org.springframework.boot", "spring-boot-starter-webflux", springBootVersion)
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")
 }

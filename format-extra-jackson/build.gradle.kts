@@ -19,8 +19,8 @@ dependencies {
     implementation(kotlin("reflect"))
     implementation(kotlin("stdlib"))
     api(project(":format-core"))
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2.2")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.2")
+    api("com.fasterxml.jackson.core:jackson-databind:2.13.2.2")
+    api("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")
 }

@@ -9,7 +9,7 @@ import org.d7z.objects.format.rules.DefaultDataFormat
 import kotlin.reflect.KClass
 
 @FormatOverride([DefaultDataFormat::class])
-class JsonDataFormat @JvmOverloads constructor(
+class GsonDataFormat @JvmOverloads constructor(
     private val gson: Gson = GsonBuilder().create(),
 ) : IFormat {
     override val types = setOf(Any::class)

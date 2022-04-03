@@ -1,1 +1,1 @@
-org.d7z.objects.format.ext.json.JsonDataFormat
+org.d7z.objects.format.ext.json.GsonDataFormat

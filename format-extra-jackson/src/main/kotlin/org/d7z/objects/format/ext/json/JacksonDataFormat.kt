@@ -9,7 +9,7 @@ import org.d7z.objects.format.rules.DefaultDataFormat
 import kotlin.reflect.KClass
 
 @FormatOverride([DefaultDataFormat::class])
-class JsonDataFormat @JvmOverloads constructor(
+class JacksonDataFormat @JvmOverloads constructor(
     private val mapper: ObjectMapper = ObjectMapper().registerKotlinModule(),
 ) : IFormat {
     override val types = setOf(Any::class)

@@ -1,5 +1,5 @@
 import org.d7z.objects.format.api.IFormat;
-import org.d7z.objects.format.ext.json.JsonDataFormat;
+import org.d7z.objects.format.ext.json.JacksonDataFormat;
 
 module org.d7z.objects.format.ext.jackson {
     requires kotlin.reflect;
@@ -9,5 +9,5 @@ module org.d7z.objects.format.ext.jackson {
     requires com.fasterxml.jackson.kotlin;
     opens org.d7z.objects.format.ext.json;
     exports org.d7z.objects.format.ext.json;
-    provides IFormat with JsonDataFormat;
+    provides IFormat with JacksonDataFormat;
 }
