@@ -18,6 +18,15 @@
 
 如何引入项目请参照 [Jitpack](https://jitpack.io/#d7z-team/object-format).
 
+### 模块介绍
+
+- [core](./format-core): 核心组件，包含基础数据类型和 `Date` 的实现，未知对象使用 Java 序列化和Base64转换成字符串 .
+- [extra-gson](./format-extra-gson): 对象转换扩展模块，未知对象使用 Gson 转换成 json 字符串.
+- [extra-jackson](./format-extra-jackson): 对象转换扩展模块，未知对象使用 jackson 转换成 json 字符串.
+- [all](./format-all): 兼容模块，使用此模块可快速导入 `core` 和 `extra-gson`.
+
+此项目已适配 Java 模块化 (JSR 376) .
+
 ## 更新日志
 
 ### 0.5.0
