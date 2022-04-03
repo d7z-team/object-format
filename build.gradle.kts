@@ -1,5 +1,4 @@
 group = "com.github.d7z-team.object-format"
-version = "last"
 
 buildscript {
     repositories {
